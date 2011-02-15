@@ -29,15 +29,16 @@ public class SharkContact extends TabActivity {
         addTabAsIntent(tabHost, "call_log", "通话记录-", R.drawable.ic_tab_artists, intent);
 
         intent = new Intent().setClass(this, Favorites.class);
-        addTabAsIntent(tabHost, "favorites", "常用联系人", R.drawable.ic_tab_artists, intent);
+        addTabAsIntent(tabHost, "favorites", "--常用联系人", R.drawable.ic_tab_artists, intent);
 
         tabHost.setCurrentTab(0); //设置启动时默认激活的标签页
     }
 
     public void addTabAsIntent(TabHost tab_host, String tab_spec, String indicator_title, int icon_resource, Intent intent){
-        TabHost.TabSpec spec;
+        TabHost.TabSpec spec = tab_host.newTabSpec(tab_spec);
+        spec.setIndicator(indicator_title, getResources().getDrawable(icon_resource)); //设置标签的标题和图标
+        spec.setContent(intent); //设置标签内容
 
-        spec = tab_host.newTabSpec(tab_spec).setIndicator(indicator_title, getResources().getDrawable(icon_resource)).setContent(intent);
         tab_host.addTab(spec);
     }
 }
