@@ -12,6 +12,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Phone">
+        </activity>
+        <activity android:name=".Favorites">
+        </activity>
+        <activity android:name=".CallLog">
+        </activity>
+
     </application>
     <uses-sdk android:minSdkVersion="7" />
 
