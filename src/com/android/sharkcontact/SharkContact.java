@@ -14,36 +14,48 @@ public class SharkContact extends TabActivity {
         createTabs();
     }
     
-    public void createTabs() {
+    private void createTabs() {
         createPhoneTab();
-        createCallLogTab();
+        createCallLogsTab();
         createFavoritesTab();
 
         getTabHost().setCurrentTab(0); //设置启动时默认激活的标签页
     }
 
-    public void createPhoneTab() {
-        Intent intent = new Intent().setClass(this, Phone.class);
-        addTabAsIntent("phone", getString(R.string.phone_tab_title), R.drawable.ic_tab_artists, intent);
+    private void createPhoneTab() {
+        addTabAsIntent("phone", 
+                tabValue(R.string.phone_tab_title, R.drawable.ic_tab_artists), 
+                new Intent(this, Phone.class));
     }
 
-    public void createCallLogTab() {
-        Intent intent = new Intent().setClass(this, CallLogs.class);
-        addTabAsIntent("call_log", getString(R.string.call_logs_tab_title), R.drawable.ic_tab_artists, intent);
+    private void createCallLogsTab() {
+        addTabAsIntent("callLogs", 
+                tabValue(R.string.call_logs_tab_title, R.drawable.ic_tab_artists), 
+                new Intent(this, CallLogs.class));
     }
 
-    public void createFavoritesTab() {
-        Intent intent = new Intent().setClass(this, Favorites.class);
-        addTabAsIntent("favorites", getString(R.string.favorites_tab_title), R.drawable.ic_tab_artists, intent);
+    private void createFavoritesTab() {
+        addTabAsIntent("favorites", 
+                tabValue(R.string.favorites_tab_title, R.drawable.ic_tab_artists), 
+                new Intent(this, Favorites.class));
     }
 
-    public void addTabAsIntent(String tab_spec, String indicator_title, int icon_resource, Intent intent) {
+    private void addTabAsIntent(String tab_spec, Bundle tab_value, Intent intent) {
         TabHost.TabSpec spec = getTabHost().newTabSpec(tab_spec);
-        spec.setIndicator(indicator_title, getResources().getDrawable(icon_resource)); //设置标签的标题和图标
-        spec.setContent(intent); //设置标签内容
+        //设置标签的标题和图标
+        spec.setIndicator(tab_value.getString("tab_title"), getResources().getDrawable(tab_value.getInt("tab_icon"))); 
+        //设置标签内容
+        spec.setContent(intent); 
 
         getTabHost().addTab(spec);
     }
 
+    private Bundle tabValue(int tab_title, int tab_icon) {
+        Bundle tab_value = new Bundle();
+        tab_value.putString("tab_title", getString(tab_title));
+        tab_value.putInt("tab_icon", tab_icon);
 
+        return tab_value;
+    }
 }
+
