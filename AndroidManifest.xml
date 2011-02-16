@@ -16,7 +16,7 @@
         </activity>
         <activity android:name=".Favorites">
         </activity>
-        <activity android:name=".CallLog">
+        <activity android:name=".CallLogs">
         </activity>
 
     </application>
