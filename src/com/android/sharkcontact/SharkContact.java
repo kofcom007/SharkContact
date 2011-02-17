@@ -40,20 +40,20 @@ public class SharkContact extends TabActivity {
                 new Intent(this, Favorites.class));
     }
 
-    private void addTabAsIntent(String tab_spec, Bundle tab_value, Intent intent) {
-        TabHost.TabSpec spec = getTabHost().newTabSpec(tab_spec);
+    private void addTabAsIntent(String tabSpecName, Bundle tabValue, Intent intent) {
+        TabHost.TabSpec spec = getTabHost().newTabSpec(tabSpecName);
         //设置标签的标题和图标
-        spec.setIndicator(tab_value.getString("tab_title"), getResources().getDrawable(tab_value.getInt("tab_icon"))); 
+        spec.setIndicator(tabValue.getString("tabTitle"), getResources().getDrawable(tabValue.getInt("tabIcon"))); 
         //设置标签内容
         spec.setContent(intent); 
 
         getTabHost().addTab(spec);
     }
 
-    private Bundle tabValue(int tab_title, int tab_icon) {
+    private Bundle tabValue(int titleRes, int iconRes) {
         Bundle tab_value = new Bundle();
-        tab_value.putString("tab_title", getString(tab_title));
-        tab_value.putInt("tab_icon", tab_icon);
+        tab_value.putString("tabTitle", getString(titleRes));
+        tab_value.putInt("tabIcon", iconRes);
 
         return tab_value;
     }
